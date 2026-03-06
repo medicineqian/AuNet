@@ -71,6 +71,10 @@ pip install -r requirements.txt
 Download dataset from:
 
 * baidu drive: https://pan.baidu.com/s/1IleD45JYPDKLYdrtCYLHuw?pwd=drnt 提取码: drnt
+  
+Download checkpoint from:
+* baidu drive:  https://pan.baidu.com/s/1IleD45JYPDKLYdrtCYLHuw?pwd=drnt 提取码: drnt
+
 ---
 
 ### 3. Training
