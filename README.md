@@ -73,8 +73,9 @@ Download dataset from:
 * baidu drive: https://pan.baidu.com/s/1IleD45JYPDKLYdrtCYLHuw?pwd=drnt 提取码: drnt
   
 Download checkpoint from:
-* baidu drive:  https://pan.baidu.com/s/1IleD45JYPDKLYdrtCYLHuw?pwd=drnt 提取码: drnt
-
+* baidu drive: https://pan.baidu.com/s/1GPldjHnnGaHG9zAx8qwJvg 提取码: best
+* baidu drive: https://pan.baidu.com/s/1jFfAp3MsaiD39lfJsGQ4xA 提取码: UAR1
+* baidu drive: https://pan.baidu.com/s/1XBK3GQV_QKAU-IW_HPeSTQ 提取码: last
 ---
 
 ### 3. Training
