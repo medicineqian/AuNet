@@ -160,10 +160,8 @@ def test(data,
         nb, _, height, width = img.shape  # batch size, channels, height, width
 
         img_rgb = img[:, :3, :, :]
-        img_rgb = torch.zeros_like(img_rgb).to(device)
         img_ir = img[:, 3:6, :, :]
         img_nir = img[:, 6:, :, :]
-        img_nir = torch.zeros_like(img_nir).to(device)
         bs_,c_,h_,w_ = img_rgb.shape
         mask_tensor_01 = create_mask(paths,h_,w_)
 
@@ -176,7 +174,7 @@ def test(data,
                 uar_pred = uar(img_rgb, img_ir, img_nir)  # [B,3]
                 # 阈值 0.3，大于等于缺失
                 uar_label = (uar_pred >= 0.3).float()
-                print("==================>uar_label",uar_label)
+                # print("==================>uar_label",uar_label)
                 absences = uar_label
 
             # 使用CLIP抽取特征
