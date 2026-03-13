@@ -92,7 +92,38 @@ python train.py
 python test.py
 ```
 
----
+## 🔧 Simulating Missing Modalities
+
+To evaluate the model under **missing modality conditions**, you can manually set a modality to zero in `test.py`.
+
+Specifically, modify **lines 161–164** in `test.py` by replacing the corresponding modality input with `torch.zeros_like()`.
+
+Example:
+
+```python
+# simulate missing RGB
+rgb = torch.zeros_like(rgb)
+
+# simulate missing NIR
+nir = torch.zeros_like(nir)
+
+# simulate missing TIR
+tir = torch.zeros_like(tir)
+```
+
+This will simulate the **absence of the selected modality** during inference.
+
+You can test different modality combinations such as:
+
+| Input Combination | Setting                           |
+| ----------------- | --------------------------------- |
+| RGB + NIR         | set `tir = torch.zeros_like(tir)` |
+| RGB + TIR         | set `nir = torch.zeros_like(nir)` |
+| NIR + TIR         | set `rgb = torch.zeros_like(rgb)` |
+| RGB only          | set `nir` and `tir` to zero       |
+| NIR only          | set `rgb` and `tir` to zero       |
+| TIR only          | set `rgb` and `nir` to zero       |
+
 
 ## 📜 License
 
