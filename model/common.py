@@ -1102,7 +1102,7 @@ def mask_loss(gt_mask,our_mask):
     # return m_loss
     return m_loss.sum()
 
-class IntraMA(nn.Module):
+class CSR(nn.Module):
     def __init__(self, c1,c2,n=1):
         super().__init__()
         self.predictor = MaskPredictor(c2)
@@ -1168,9 +1168,9 @@ class MaskPredictor(nn.Module):
         # print(x.shape) torch.Size([8, 1, 160, 160])
         return x
 
-class UncertainFusion(nn.Module):
-    def __init__(self, d_model, vert_anchors=16, horz_anchors=16, intraMA_count=0, h=8, block_exp=4, n_layer=1, embd_pdrop=0.1, attn_pdrop=0.1, resid_pdrop=0.1):
-        super(UncertainFusion, self).__init__()
+class MAI(nn.Module):
+    def __init__(self, d_model, vert_anchors=16, horz_anchors=16, CSR_count=0, h=8, block_exp=4, n_layer=1, embd_pdrop=0.1, attn_pdrop=0.1, resid_pdrop=0.1):
+        super(MAI, self).__init__()
         self.fusion_block = TransformerFusionBlock(d_model, vert_anchors, horz_anchors, h, block_exp, n_layer, embd_pdrop, attn_pdrop, resid_pdrop)
     def forward(self, x,is_absent):
         rgb_fea, tir_fea, nir_fea = x
