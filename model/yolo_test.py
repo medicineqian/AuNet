@@ -150,7 +150,7 @@ class Model(nn.Module):
             image_proj_rgb,image_proj_ir,image_proj_nir = None,None,None
         for m in self.model:
             if 0<=m.i <=12:
-                if "IntraMA" in m.type:
+                if "CSR" in m.type:
                     loss_nir, loss_tir, loss_rgb = 0,0,0
                     if nir is not None:
                         nir,is_absent_nir,loss_nir= m(nir,absent_nir,mask_tensor_01,image_features_map_nir,image_proj_nir)
@@ -161,7 +161,7 @@ class Model(nn.Module):
                     x = None
                     y.append(x if m.i in self.save else None)  # save output
                     feature_loss = feature_loss + loss_nir + loss_tir + loss_rgb
-                elif "UncertainFusion" in m.type:
+                elif "MAI" in m.type:
                     x = m(x=(rgb,tir,nir),is_absent=(absent_rgb,absent_tir,absent_nir))
                     y.append(x if m.i in self.save else None)  # save output
                 else:
@@ -272,7 +272,7 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
 
         n = max(round(n * gd), 1) if n > 1 else n  # depth gain
         if m in [Conv, GhostConv, Bottleneck, GhostBottleneck, SPP, SPPF, DWConv, MixConv2d, Focus, CrossConv, BottleneckCSP,
-                 C3, C3TR,IntraMA]:
+                 C3, C3TR,CSR]:
 
             if m is Focus:
                 c1, c2 = 3, args[0]
@@ -290,7 +290,7 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
                     c2 = make_divisible(c2 * gw, 8)
 
                 args = [c1, c2, *args[1:]]
-                if m in [BottleneckCSP, C3, C3TR,IntraMA]:
+                if m in [BottleneckCSP, C3, C3TR,CSR]:
                     args.insert(2, n)  # number of repeats
                     n = 1
 
@@ -323,7 +323,7 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
             c1 = sum([ch[x] for x in f])
             c2 = c1 // 3
             args = [c1, c2, *args]
-        elif m is UncertainFusion:
+        elif m is MAI:
             c2 = args[0]
             print('c2',c2)
             args = [c2, *args[1:]]
